@@ -6,32 +6,33 @@ using System;
 
 public class calendar : MonoBehaviour
 {
-    [SerializeField] Button today;
-    [SerializeField] Button previous;
-    [SerializeField] Button next;
+    [SerializeField] Button today;          //返回今天
+    [SerializeField] Button previous;       //上一个月
+    [SerializeField] Button next;           //下一个月
  
-    private const int numOfbuttons = 37;
+    private const int numOfbuttons = 37;    //表示日期所用37个按钮
 
     private Button[] buttons;
-    private int month;
+    private int month;                      
     private int year;
-    private int numOfdays;
-    private DateTime dateValue;
-    private int dayOfweek;
+    private int numOfdays;                  //每月天数
+    private DateTime dateValue;             //DateTime型临时变量
+    private int dayOfweek;                  //星期几
 
-    // ==============================================================
     void Awake()
     {
         buttons = new Button[numOfbuttons];
 
         buttonClear();
-        year = System.DateTime.Today.Year;
-        month = System.DateTime.Today.Month;
+        year = System.DateTime.Today.Year;  //取得今天的年份
+        month = System.DateTime.Today.Month;//取得今天的月份
         SetDate();
-
+        
+        //显示今天的日期
         today.GetComponentInChildren<Text>().text = System.DateTime.Today.ToString("yyyy-MM-dd");
     }
 
+    //设定日历显示
     private void SetDate()
     {
         numOfdays = System.DateTime.DaysInMonth(year, month);
@@ -46,6 +47,7 @@ public class calendar : MonoBehaviour
         }
     }
 
+    //清空日历文字
     private void buttonClear()
     {
         for (int i = 0; i < numOfbuttons; i++)
@@ -59,11 +61,13 @@ public class calendar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //按钮事件
         today.onClick.AddListener(todayOnClick);
         previous.onClick.AddListener(preOnClick);
         next.onClick.AddListener(nextOnClick);
     }
 
+    //下一个月
     private void nextOnClick()
     {
         buttonClear();
@@ -80,6 +84,7 @@ public class calendar : MonoBehaviour
         today.GetComponentInChildren<Text>().text = dateValue.ToString("yyyy-MM");
     }
 
+    //上一个月
     private void preOnClick()
     {
         buttonClear();
@@ -96,6 +101,7 @@ public class calendar : MonoBehaviour
         today.GetComponentInChildren<Text>().text = dateValue.ToString("yyyy-MM");
     }
 
+    //返回今天
     private void todayOnClick()
     {
         buttonClear();
