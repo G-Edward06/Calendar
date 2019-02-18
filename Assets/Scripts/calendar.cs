@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class calendar : MonoBehaviour
+public class Calendar : MonoBehaviour
 {
     [SerializeField] Button today;          //返回今天
     [SerializeField] Button previous;       //上一个月
@@ -22,8 +22,13 @@ public class calendar : MonoBehaviour
     void Awake()
     {
         buttons = new Button[numOfbuttons];
+        for (int i = 0; i < numOfbuttons; i++)
+        {
+            Button _buttons = GameObject.Find("Button_" + i).GetComponent<Button>();
+            buttons[i] = _buttons;
+        }
 
-        buttonClear();
+        ButtonClear();
         year = System.DateTime.Today.Year;  //取得今天的年份
         month = System.DateTime.Today.Month;//取得今天的月份
         SetDate();
@@ -48,12 +53,10 @@ public class calendar : MonoBehaviour
     }
 
     //清空日历文字
-    private void buttonClear()
+    private void ButtonClear()
     {
         for (int i = 0; i < numOfbuttons; i++)
         {
-            Button _buttons = GameObject.Find("Button_" + i).GetComponent<Button>();
-            buttons[i] = _buttons;
             buttons[i].GetComponentInChildren<Text>().text = "";
         }
     }
@@ -62,15 +65,15 @@ public class calendar : MonoBehaviour
     void Start()
     {
         //按钮事件
-        today.onClick.AddListener(todayOnClick);
-        previous.onClick.AddListener(preOnClick);
-        next.onClick.AddListener(nextOnClick);
+        today.onClick.AddListener(TodayOnClick);
+        previous.onClick.AddListener(PreOnClick);
+        next.onClick.AddListener(NextOnClick);
     }
 
     //下一个月
-    private void nextOnClick()
+    private void NextOnClick()
     {
-        buttonClear();
+        ButtonClear();
         if (month == 12)
         {
             year += 1;
@@ -85,9 +88,9 @@ public class calendar : MonoBehaviour
     }
 
     //上一个月
-    private void preOnClick()
+    private void PreOnClick()
     {
-        buttonClear();
+        ButtonClear();
         if(month == 1)
         {
             year -= 1;
@@ -102,9 +105,9 @@ public class calendar : MonoBehaviour
     }
 
     //返回今天
-    private void todayOnClick()
+    private void TodayOnClick()
     {
-        buttonClear();
+        ButtonClear();
         year = System.DateTime.Today.Year;
         month = System.DateTime.Today.Month;
         SetDate();
