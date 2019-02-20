@@ -6,9 +6,9 @@ using System;
 
 public class Calendar : MonoBehaviour
 {
-    [SerializeField] Button today;          //返回今天
-    [SerializeField] Button previous;       //上一个月
-    [SerializeField] Button next;           //下一个月
+    private Button today;          //返回今天
+    private Button previous;       //上一个月
+    private Button next;           //下一个月
  
     private const int numOfbuttons = 37;    //表示日期所用37个按钮
 
@@ -21,6 +21,10 @@ public class Calendar : MonoBehaviour
 
     void Awake()
     {
+        today = transform.Find("today").GetComponentInChildren<Button>();
+        previous = transform.Find("pre").GetComponentInChildren<Button>();
+        next = transform.Find("next").GetComponentInChildren<Button>();
+
         buttons = new Button[numOfbuttons];
         for (int i = 0; i < numOfbuttons; i++)
         {
