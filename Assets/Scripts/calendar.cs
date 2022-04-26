@@ -6,18 +6,18 @@ using System;
 
 public class Calendar : MonoBehaviour
 {
-    private Button today;          //返回今天
-    private Button previous;       //上一个月
-    private Button next;           //下一个月
+    private Button today;          //返回今天　「今日」へ
+    private Button previous;       //上一个月　「前の月」へ
+    private Button next;           //下一个月　「次の月」へ
  
-    private const int numOfbuttons = 37;    //表示日期所用37个按钮
+    private const int numOfbuttons = 37;    //表示日期所用37个按钮　ボタン37個
 
     private Button[] buttons;
     private int month;                      
     private int year;
-    private int numOfdays;                  //每月天数
-    private DateTime dateValue;             //DateTime型临时变量
-    private int dayOfweek;                  //星期几
+    private int numOfdays;                  //每月天数　当月の日数
+    private DateTime dateValue;             //DateTime型临时变量　DataTimeを取得する変数
+    private int dayOfweek;                  //星期几　曜日
 
     void Awake()
     {
@@ -33,11 +33,11 @@ public class Calendar : MonoBehaviour
         }
 
         ButtonClear();
-        year = System.DateTime.Today.Year;  //取得今天的年份
-        month = System.DateTime.Today.Month;//取得今天的月份
+        year = System.DateTime.Today.Year;  //取得今天的年份　「今日」の西暦年
+        month = System.DateTime.Today.Month;//取得今天的月份　「今日」の月
         SetDate();
         
-        //显示今天的日期
+        //显示今天的日期　「今日」を表示
         today.GetComponentInChildren<Text>().text = System.DateTime.Today.ToString("yyyy-MM-dd");
     }
 
@@ -56,7 +56,7 @@ public class Calendar : MonoBehaviour
         }
     }
 
-    //清空日历文字
+    //清空日历文字　ボタンのテキストを削除
     private void ButtonClear()
     {
         for (int i = 0; i < numOfbuttons; i++)
@@ -68,13 +68,13 @@ public class Calendar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //按钮事件
+        //按钮事件　ボタンイベント
         today.onClick.AddListener(TodayOnClick);
         previous.onClick.AddListener(PreOnClick);
         next.onClick.AddListener(NextOnClick);
     }
 
-    //下一个月
+    //下一个月　「次の月へ」イベント
     private void NextOnClick()
     {
         ButtonClear();
@@ -91,7 +91,7 @@ public class Calendar : MonoBehaviour
         today.GetComponentInChildren<Text>().text = dateValue.ToString("yyyy-MM");
     }
 
-    //上一个月
+    //上一个月　「前の月へ」イベント
     private void PreOnClick()
     {
         ButtonClear();
@@ -108,7 +108,7 @@ public class Calendar : MonoBehaviour
         today.GetComponentInChildren<Text>().text = dateValue.ToString("yyyy-MM");
     }
 
-    //返回今天
+    //返回今天　「今日」へ戻るイベント
     private void TodayOnClick()
     {
         ButtonClear();
