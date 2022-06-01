@@ -18,12 +18,14 @@ public class Calendar : MonoBehaviour
     private int numOfdays;                  //每月天数　当月の日数
     private DateTime dateValue;             //DateTime型临时变量　DataTimeを取得する変数
     private int dayOfweek;                  //星期几　曜日
-
+    private Image bgImg;
+    public Sprite[] BgSprites;
     void Awake()
     {
         today = transform.Find("today").GetComponentInChildren<Button>();
         previous = transform.Find("pre").GetComponentInChildren<Button>();
         next = transform.Find("next").GetComponentInChildren<Button>();
+        bgImg = transform.Find("Panel").GetComponent<Image>();
 
         buttons = new Button[numOfbuttons];
         for (int i = 0; i < numOfbuttons; i++)
@@ -54,6 +56,9 @@ public class Calendar : MonoBehaviour
             buttons[dayOfweek + i].GetComponentInChildren<Text>().text = index.ToString();
             index++;
         }
+        
+        // set background image
+        bgImg.sprite = BgSprites[month-1];
     }
 
     //清空日历文字　ボタンのテキストを削除
