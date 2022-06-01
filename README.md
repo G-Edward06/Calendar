@@ -9,4 +9,4 @@ UnityのUIシステムを勉強する時に、カレンダーを試作しまし�
 
 ３．真ん中ボタンを押すと「今日」へ戻ります。
 
-![calendar](https://user-images.githubusercontent.com/25500577/165308865-6f07897e-f2bd-437d-9ebe-c6e9d342ad59.jpg)
+![calendar_kai](https://user-images.githubusercontent.com/25500577/171440286-82d021b2-bc46-46c0-a279-da237fad7e27.png)
